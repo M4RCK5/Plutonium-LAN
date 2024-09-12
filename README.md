@@ -1,4 +1,4 @@
-### ---PLUTONIUM LAN---
+## Plutonium LAN
 Set of batch scripts to launch Plutonium in LAN mode without using an account.
 
 ### Instalation:
