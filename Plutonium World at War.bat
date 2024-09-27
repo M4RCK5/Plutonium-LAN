@@ -10,7 +10,7 @@ call :title
 echo Checking for updates...
 echo.
 
-ping -n 1 updater-archive.plutools.pw >nul 2>&1
+ping -n 5 "plutonium-archive.getserve.rs" >nul 2>&1
 if %errorlevel% equ 1 echo Connection Failed.
 if %errorlevel% equ 0 (
 	for /f "tokens=1,* delims=:" %%a in ('curl -ks "https://api.github.com/repos/ineedbots/t4_bot_warfare/releases/latest" ^| findstr "browser_download_url"') do (
