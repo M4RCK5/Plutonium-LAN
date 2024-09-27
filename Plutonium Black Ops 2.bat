@@ -10,7 +10,7 @@ call :title
 echo Checking for updates...
 echo.
 
-ping -n 1 updater-archive.plutools.pw >nul 2>&1
+ping -n 1 "plutonium-archive.getserve.rs" >nul 2>&1
 if %errorlevel% equ 1 echo Connection Failed.
 if %errorlevel% equ 0 (
 	if not exist "plutonium-updater.exe" (
