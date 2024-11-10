@@ -17,15 +17,17 @@ if %errorlevel% equ 0 (
 		echo %%b | findstr "*bw*.zip" >nul 2>&1
 		if %errorlevel% equ 0 (
 			curl -sLo "bot_warfare.zip" %%b
-			powershell -command "expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium World at War\storage\t4\mods' -force"
+			powershell -noprofile -command "expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium World at War\storage\t4\mods' -force"
 			del /f /q "bot_warfare.zip"
 		)
 	)
+	
 	if not exist "plutonium-updater.exe" (
 		curl -sLo "plutonium-updater.zip" "https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
-		powershell -command "expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
+		powershell -noprofile -command "expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
 		del /f /q "plutonium-updater.zip"
 	)
+	
 	if exist "plutonium-updater.exe" (
 		plutonium-updater --no-color -qfd "Plutonium World at War" -e bin/plutonium-launcher-win32.exe -e bin/steam_api64.dll -e bin/VibeCheck.exe -e games/t5sp.exe -e games/t5mp.exe -e storage/t5 -e games/t6zm.exe -e games/t6mp.exe -e storage/t6 -e games/iw5sp.exe -e games/iw5mp.exe -e storage/iw5
 		color 08
@@ -47,11 +49,9 @@ echo.
 choice /c 123 /n /m "Choose an option: "
 
 call :title
-if %errorlevel% equ 1 set /p "player_name=Player Name: "
-if %errorlevel% equ 1 (
-	>player_name.txt echo %player_name%
-	goto start
-)
+if %errorlevel% equ 1 for /f "delims=" %%i in ('
+		powershell -NoProfile -Command "$input = Read-Host 'Player Name [a-zA-Z0-9 -_.]'; $filtered = ($input.ToCharArray() | Where-Object { $_ -match '[a-zA-Z0-9 -_.]' }) -join ''; if ($filtered) { $filtered } else { 'Plutonium' }"
+') do set "player_name=%%i" && (echo %%i)>player_name.txt & goto :start
 if %errorlevel% equ 2 (
 	set app_id=t4mp
 	if exist "Plutonium World at War\storage\t4\mods\mp_bots" set extra=+set fs_localAppData "%~dp0Plutonium World at War\storage\t4" +set fs_game "mods\mp_bots"
