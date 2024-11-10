@@ -22,4 +22,4 @@ Set of batch scripts to launch Plutonium in LAN mode without using an account.
 * It also installs "TeknoMW3 Coop" and "Bot Warfare IW5/T4".
 
 ### Notes:
-* It requires W10/11 updated because it relies on **curl** and **powershell**.
+* It requires W10/11 updated because it relies on **CURL** and **POWERSHELL**.
