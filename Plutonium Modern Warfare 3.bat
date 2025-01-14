@@ -22,13 +22,6 @@ if %errorlevel% equ 0 (
 		)
 	)
 	
-	if not exist "teknomw3_files-main.zip" (
-		curl -sLo "teknomw3_files-main.zip" "https://github.com/M4RCK5/teknomw3_files/archive/refs/heads/main.zip"
-		powershell -noprofile -command "expand-archive -path 'teknomw3_files-main.zip' -destinationpath '.'"
-		xcopy /s /q /y /i "teknomw3_files-main" "." >nul 2>&1
-		rd /s /q "teknomw3_files-main"
-	)
-	
 	if not exist "plutonium-updater.exe" (
 		curl -sLo "plutonium-updater.zip" "https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
 		powershell -noprofile -command "expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
@@ -51,18 +44,14 @@ echo Player: %player_name%
 echo.
 echo 1-Player Name
 echo 2-Modern Warfare 3 Multiplayer
-echo 3-Modern Warfare 3 Cooperative
 echo.
-choice /c 123 /n /m "Choose an option: "
+choice /c 12 /n /m "Choose an option: "
 
 call :title
 if %errorlevel% equ 1 for /f "delims=" %%i in ('
 		powershell -NoProfile -Command "$input = Read-Host 'Player Name [a-zA-Z0-9 -_.]'; $filtered = ($input.ToCharArray() | Where-Object { $_ -match '[a-zA-Z0-9 -_.]' }) -join ''; if ($filtered) { $filtered } else { 'Plutonium' }"
 ') do set "player_name=%%i" && (echo %%i)>player_name.txt & goto :start
-if %errorlevel% equ 3 (
-	start TeknoMW3.exe
-	exit
-)
+
 echo Start a private match and join using "/connect IP".
 timeout /t 5
 
