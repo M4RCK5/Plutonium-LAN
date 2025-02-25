@@ -20,6 +20,3 @@ Set of batch scripts to launch Plutonium in LAN mode without using an account.
 * The script updates the Plutonium version for every game except T6 (r2905 needed to connect trough IP).
 * Plutonium Updater comes from [here](https://github.com/mxve/plutonium-updater.rs).
 * It also installs "Bot Warfare IW5/T4".
-
-### Notes:
-* It requires W10/11 updated because it relies on **CURL** and **POWERSHELL**.
