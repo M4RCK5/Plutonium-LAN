@@ -14,8 +14,8 @@ ping -n 5 "plutonium-archive.getserve.rs" >nul 2>&1
 if %errorlevel% equ 1 echo Connection Failed.
 if %errorlevel% equ 0 (
 	if not exist "plutonium-updater.exe" (
-		curl -sLo "plutonium-updater.zip" "https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
-		powershell -noprofile -command "expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
+		powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri 'https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip' -outfile 'plutonium-updater.zip'"
+		powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
 		del /f /q "plutonium-updater.zip"
 	)
 	

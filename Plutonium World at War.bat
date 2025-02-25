@@ -13,18 +13,18 @@ echo.
 ping -n 5 "plutonium-archive.getserve.rs" >nul 2>&1
 if %errorlevel% equ 1 echo Connection Failed.
 if %errorlevel% equ 0 (
-	for /f "tokens=1,* delims=:" %%a in ('curl -ks "https://api.github.com/repos/ineedbots/t4_bot_warfare/releases/latest" ^| findstr "browser_download_url"') do (
-		echo %%b | findstr "*bw*.zip" >nul 2>&1
+	for /f "delims=" %%a in ('powershell -command "(invoke-restmethod -uri 'https://api.github.com/repos/ineedbots/t4_bot_warfare/releases/latest').assets.browser_download_url"') do (
+		echo %%a | findstr "*bw*.zip" >nul 2>&1
 		if %errorlevel% equ 0 (
-			curl -sLo "bot_warfare.zip" %%b
+			powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri '%%a' -outfile 'bot_warfare.zip'"
 			powershell -noprofile -command "expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium World at War\storage\t4\mods' -force"
 			del /f /q "bot_warfare.zip"
 		)
 	)
 	
 	if not exist "plutonium-updater.exe" (
-		curl -sLo "plutonium-updater.zip" "https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
-		powershell -noprofile -command "expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
+		powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri 'https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip' -outfile 'plutonium-updater.zip'"
+		powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'plutonium-updater.zip' -destinationpath '.'"
 		del /f /q "plutonium-updater.zip"
 	)
 	
