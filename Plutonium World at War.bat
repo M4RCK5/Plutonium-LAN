@@ -17,7 +17,7 @@ if %errorlevel% equ 0 (
 		echo %%a | findstr "*bw*.zip" >nul 2>&1
 		if %errorlevel% equ 0 (
 			powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri '%%a' -outfile 'bot_warfare.zip'"
-			powershell -noprofile -command "expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium World at War\storage\t4\mods' -force"
+			powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium World at War\storage\t4\mods' -force"
 			del /f /q "bot_warfare.zip"
 		)
 	)
