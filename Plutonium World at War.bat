@@ -54,7 +54,6 @@ if %errorlevel% equ 1 for /f "delims=" %%i in ('
 ') do set "player_name=%%i" && (echo %%i)>player_name.txt & goto :start
 if %errorlevel% equ 2 (
 	set app_id=t4mp
-	if exist "Plutonium World at War\storage\t4\mods\mp_bots" set extra=+set fs_localAppData "%~dp0Plutonium World at War\storage\t4" +set fs_game "mods\mp_bots"
 	echo Start a private match and join using "/connect IP".
 )
 if %errorlevel% equ 3 (
@@ -65,7 +64,7 @@ if %errorlevel% equ 3 (
 )
 timeout /t 5
 
-start /wait "" /d "Plutonium World at War" /b "bin\plutonium-bootstrapper-win32.exe" %app_id% "%cd%" -nocurses -lan -offline -name "%player_name%" %extra%
+start /wait "" /d "Plutonium World at War" /b "bin\plutonium-bootstrapper-win32.exe" %app_id% "%cd%" -nocurses -lan -offline -name "%player_name%"
 exit
 
 :title
