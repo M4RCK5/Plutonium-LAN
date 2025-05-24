@@ -17,4 +17,4 @@ Set of batch scripts to launch Plutonium in LAN mode without using an account.
 * You can run multiple instances of the game.
 * Its fully portable and will not interfere with your normal Plutonium install.
 * Plutonium Updater comes from [here](https://github.com/mxve/plutonium-updater.rs).
-* It also installs "Bot Warfare" for all games except BO2.
+* It also installs "Bot Warfare T4/IW5".
