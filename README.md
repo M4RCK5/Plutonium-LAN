@@ -16,7 +16,6 @@ Set of batch scripts to launch Plutonium in LAN mode without using an account.
 * It has an little menu that allows you to change and save a player name.
 * You can run multiple instances of the game with plutonium so u can try to do some splitscreen matches using tools like UniversalSplitScreen or NucleousCoop.
 * Its fully portable and will not interfere with your normal Plutonium install.
-* T5 doesnt allow conections trough the console using IP so this script will only allow offline play.
 * The script updates the Plutonium version for every game except T6 (r2905 needed to connect trough IP).
 * Plutonium Updater comes from [here](https://github.com/mxve/plutonium-updater.rs).
 * It also installs "Bot Warfare IW5/T4".
