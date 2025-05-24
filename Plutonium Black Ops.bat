@@ -48,7 +48,7 @@ if %errorlevel% equ 2 (
 	echo Start a private match and join using "/connect IP".
 )
 if %errorlevel% equ 3 (
-	3 set app_id=t5sp
+	set app_id=t5sp
 	echo 1-Set "/zm_minplayers" [4 Players Max].
 	echo 2-Start the match and wait for other players.
 	echo 3-Join using "/connect IP".
