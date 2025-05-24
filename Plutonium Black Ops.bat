@@ -42,10 +42,17 @@ choice /c 123 /n /m "Choose an option: "
 call :title
 if %errorlevel% equ 1 for /f "delims=" %%i in ('
 		powershell -NoProfile -Command "$input = Read-Host 'Player Name [a-zA-Z0-9 -_.]'; $filtered = ($input.ToCharArray() | Where-Object { $_ -match '[a-zA-Z0-9 -_.]' }) -join ''; if ($filtered) { $filtered } else { 'Plutonium' }"
-') do set "player_name=%%i" && (echo %%i)>player_name.txt & goto :startif %errorlevel% equ 2 set app_id=t5mp
-if %errorlevel% equ 3 set app_id=t5sp
-
-echo Command "/connect IP" not supported.
+') do set "player_name=%%i" && (echo %%i)>player_name.txt & goto :start
+if %errorlevel% equ 2 (
+	set app_id=t5mp
+	echo Start a private match and join using "/connect IP".
+)
+if %errorlevel% equ 3 (
+	3 set app_id=t5sp
+	echo 1-Set "/zm_minplayers" [4 Players Max].
+	echo 2-Start the match and wait for other players.
+	echo 3-Join using "/connect IP".
+)
 timeout /t 5
 
 start /wait "" /d "Plutonium Black Ops" /b "bin\plutonium-bootstrapper-win32.exe" %app_id% "%cd%" -nocurses -lan -offline -name "%player_name%"
