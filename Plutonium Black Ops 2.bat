@@ -53,6 +53,7 @@ if %errorlevel% equ 3 (
 	echo 1-Set "/zm_minplayers" [4 Players Max].
 	echo 2-Start the match and wait for other players.
 	echo 3-Join using "/connect IP".
+	echo 4-Restart using "/fast_restart" if needed.
 )
 timeout /t 5
 
