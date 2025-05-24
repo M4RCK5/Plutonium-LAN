@@ -49,7 +49,7 @@ if %errorlevel% equ 2 (
 )
 if %errorlevel% equ 3 (
 	set app_id=t5sp
-	echo 1-Set "/zm_minplayers" [4 Players Max].
+	echo 1-Set "/sp_minplayers" [4 Players Max].
 	echo 2-Start the match and wait for other players.
 	echo 3-Join using "/connect IP".
 )
