@@ -20,7 +20,8 @@ if %errorlevel% equ 0 (
 	)
 	
 	if exist "plutonium-updater.exe" (
-		plutonium-updater --no-color -qfd "Plutonium Black Ops 2" --archive "2905" -e bin/plutonium-launcher-win32.exe -e bin/steam_api64.dll -e bin/VibeCheck.exe -e games/t4sp.exe -e games/t4mp.exe -e storage/t4 -e games/t5sp.exe -e games/t5mp.exe -e storage/t5 -e games/iw5sp.exe -e games/iw5mp.exe -e storage/iw5
+		:: --archive "2905" for old version.
+		plutonium-updater --no-color -qfd "Plutonium Black Ops 2" -e bin/plutonium-launcher-win32.exe -e bin/steam_api64.dll -e bin/VibeCheck.exe -e games/t4sp.exe -e games/t4mp.exe -e storage/t4 -e games/t5sp.exe -e games/t5mp.exe -e storage/t5 -e games/iw5sp.exe -e games/iw5mp.exe -e storage/iw5
 		color 0C
 	)
 )
