@@ -65,3 +65,16 @@ echo.
 echo ----Plutonium LAN----
 echo.
 goto :eof
+
+:bot_warfare
+for /f "delims=" %%a in ('powershell -command "(invoke-restmethod -uri 'https://api.github.com/repos/ineedbots/t5_bot_warfare/releases/latest').assets.browser_download_url"') do (
+	echo %%a | findstr "*bw*.zip" >nul 2>&1
+	if %errorlevel% equ 0 (
+		powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri '%%a' -outfile 'bot_warfare.zip'"
+		powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'bot_warfare.zip' -destinationpath 'Plutonium Black Ops\bot_warfare' -force"
+		for /d /r "Plutonium Black Ops\bot_warfare" %%b in (*) do if "%%~nb"=="mp_bots" xcopy "%%~b" "Plutonium Black Ops\storage\t5\mods\mp_bots\" /e /q /y >nul
+		del /f /q "bot_warfare.zip"
+		rd /s /q "Plutonium Black Ops\bot_warfare"
+	)
+)
+goto :eof
