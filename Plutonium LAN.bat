@@ -35,13 +35,10 @@ call :title
 echo Searching for updates...
 
 :: Update Plutonium
-ping -n 3 "cdn.plutonium.pw" >nul 2>&1
-if %errorlevel% equ 0 (
-	if not exist "plutonium.exe" powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest 'https://cdn.plutonium.pw/updater/plutonium.exe' -outfile 'plutonium.exe'" 2>nul
-	for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://cdn.plutoniummod.com/updater/prod/info.json').revision" 2^>nul') do set "remote=%%a"
-	if exist "info.json" for /f "delims=" %%a in ('powershell -command "(get-content -path 'info.json' -raw | convertfrom-json).revision" 2^>nul') do set "local=%%a"
-	if not "%remote%"=="%local%" plutonium.exe -install-dir "." -update-only
-)
+if not exist "plutonium.exe" powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest 'https://cdn.plutonium.pw/updater/plutonium.exe' -outfile 'plutonium.exe'" 2>nul
+for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://cdn.plutoniummod.com/updater/prod/info.json').revision" 2^>nul') do set "remote=%%a"
+if exist "info.json" for /f "delims=" %%a in ('powershell -command "(get-content -path 'info.json' -raw | convertfrom-json).revision" 2^>nul') do set "local=%%a"
+if defined remote if not "%remote%"=="%local%" plutonium.exe -install-dir "." -update-only
 
 :: Install Bot Warfare
 for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://api.github.com/repos/ineedbots/%app_id%_bot_warfare/releases/latest').assets.browser_download_url" 2^>nul') do (
