@@ -1,20 +1,17 @@
 ## Plutonium LAN
-Set of batch scripts to launch Plutonium in LAN mode without using an account.
+Batch script to launch Plutonium in LAN mode without using an account.
 
 ### Instalation:
- 1 - [Download the latest version](https://github.com/M4RCK5/Plutonium-LAN/archive/refs/heads/main.zip).
+ 1 - [Download and decompress the latest version](https://github.com/M4RCK5/Plutonium-LAN/archive/refs/heads/main.zip).
  
- 2 - Move "Plutonium GAME_NAME.bat" to the game folder.
+ 2 - Move "Plutonium LAN.bat" to the game folder and run it.
  
- 3 - Run "Plutonium GAME_NAME.bat".
+ 3 - Change the player name.
  
- 4 - Change the player name.
- 
- 5 - Launch the game.
+ 4 - Launch the game.
 
 ### Features: 
-* It has an little menu that allows you to change and save a player name.
+* Allows you to change and save a player name.
 * You can run multiple instances of the game.
-* Its fully portable and will not interfere with your normal Plutonium install.
-* Plutonium Updater comes from [here](https://github.com/mxve/plutonium-updater.rs).
-* It also installs "Bot Warfare T4/IW5".
+* Doesn't interfere with your normal Plutonium install.
+* Installs "Bot Warfare T4/T5/IW5".
