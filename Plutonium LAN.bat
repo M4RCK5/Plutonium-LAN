@@ -72,6 +72,16 @@ if !errorlevel! equ 1 (
 if !errorlevel! equ 2 set "run_id=!mp_id!"
 if !errorlevel! equ 3 set "run_id=!cp_id!"
 if !errorlevel! gtr 1 if defined run_id (
+	echo Commands:
+	echo     /connect IP
+	echo     /fast_restart
+	echo     /com_maxfps
+	echo     /r_dof_enable
+	echo     /cg_drawfps
+	echo     /cg_fov
+	timeout /t 5
+	echo.
+	
 	cd /d "%~dp0"
 	start /wait "" /d "%systemdrive%\Plutonium" /b "bin\plutonium-bootstrapper-win32.exe" !run_id! "!cd!" -nocurses -lan -offline -name "!player_name!"
 	exit
