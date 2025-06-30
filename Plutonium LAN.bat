@@ -2,8 +2,10 @@
 >nul chcp 65001
 title Plutonium LAN
 
+set "workdir=%systemdrive%\"
+if exist "%~dp0plutonium_portable.txt" set "workdir=%~dp0"
 taskkill /f /im "plutonium-launcher-win32.exe" 2>nul
-cd /d "%systemdrive%\" & md "Plutonium" >nul 2>&1 & cd /d "Plutonium" 2>nul
+cd /d "%workdir%" & md "Plutonium" >nul 2>&1 & cd /d "Plutonium" 2>nul
 
 :: Enable ANSI Colours (https://ss64.com/nt/syntax-ansi.html)
 for /f "tokens=2 delims=[]" %%a in ('ver') do set os_ver=%%a
@@ -83,7 +85,7 @@ if !errorlevel! gtr 1 if defined run_id (
 	echo.
 	
 	cd /d "%~dp0"
-	start /wait "" /d "%systemdrive%\Plutonium" /b "bin\plutonium-bootstrapper-win32.exe" !run_id! "!cd!" -nocurses -lan -offline -name "!player_name!"
+	start /wait "" /d "%workdir%Plutonium" /b "bin\plutonium-bootstrapper-win32.exe" !run_id! "!cd!" -nocurses -lan -offline -name "!player_name!"
 	exit
 )
 endlocal
