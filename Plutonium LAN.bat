@@ -77,6 +77,7 @@ if !errorlevel! gtr 1 if defined run_id (
 	echo Commands:
 	echo     /connect IP
 	echo     /fast_restart
+	echo     /xpartygo
 	echo     /com_maxfps
 	echo     /r_dof_enable
 	echo     /cg_drawfps
@@ -96,4 +97,5 @@ cls
 echo.
 echo ----%title%----
 echo.
+
 goto :eof
