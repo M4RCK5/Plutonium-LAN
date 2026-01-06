@@ -19,8 +19,8 @@ for /f "tokens=1,3 delims=." %%a in ("%os_ver_num%") do (
 			set "green=%%c[32;40m"
 			set "yellow=%%c[33;40m"
 			set "blue=%%c[36;40m"
-			set "pink=%%c[95m;40m"
-			set "lblue=%%c[96m;40"
+			set "pink=%%c[95;40m"
+			set "lblue=%%c[96;40m"
 		)
 	)
 )
@@ -99,3 +99,4 @@ echo ----%title%----
 echo.
 
 goto :eof
+
