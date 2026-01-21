@@ -35,12 +35,16 @@ if "%md5_hash%"=="d68f0070c19aac5e20cdf5e656f2e477" set "app_id=iw5" & set "mp_i
 
 call :title
 echo Searching for updates...
+echo.
 
 :: Update Plutonium
-if not exist "plutonium.exe" powershell -command "$progresspreference = 'silentlycontinue'; invoke-webrequest 'https://cdn.plutonium.pw/updater/plutonium.exe' -outfile 'plutonium.exe'" 2>nul
-for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://cdn.plutoniummod.com/updater/prod/info.json').revision" 2^>nul') do set "remote=%%a"
-if exist "info.json" for /f "delims=" %%a in ('powershell -command "(get-content -path 'info.json' -raw | convertfrom-json).revision" 2^>nul') do set "local=%%a"
-if defined remote if not "%remote%"=="%local%" plutonium.exe -install-dir "." -update-only
+set "updater_url=https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
+if not exist "plutonium-updater.exe" (
+	powershell -noprofile -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri '%updater_url%' -outfile 'plutonium_updater.zip'" >nul 2>&1
+	powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'plutonium_updater.zip' -destinationpath '.' -force" >nul 2>&1
+	del /f /q "plutonium_updater.zip" >nul 2>&1
+)
+plutonium-updater --no-color -d "." -c -q 2>nul || plutonium-updater --no-color -d "." -q 2>nul
 
 :: Install Bot Warfare
 for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://api.github.com/repos/ineedbots/%app_id%_bot_warfare/releases/latest').assets.browser_download_url" 2^>nul') do (
@@ -99,4 +103,5 @@ echo ----%title%----
 echo.
 
 goto :eof
+
 
