@@ -44,7 +44,7 @@ if not exist "plutonium-updater.exe" (
 	powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'plutonium_updater.zip' -destinationpath '.' -force" >nul 2>&1
 	del /f /q "plutonium_updater.zip" >nul 2>&1
 )
-plutonium-updater --no-color -d "." -c -q 2>nul || plutonium-updater --no-color -d "." -q 2>nul
+plutonium-updater --no-color -d "." -c -q || plutonium-updater --no-color -d "." -q
 
 :: Install Bot Warfare
 for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://api.github.com/repos/ineedbots/%app_id%_bot_warfare/releases/latest').assets.browser_download_url" 2^>nul') do (
@@ -103,5 +103,6 @@ echo ----%title%----
 echo.
 
 goto :eof
+
 
 
