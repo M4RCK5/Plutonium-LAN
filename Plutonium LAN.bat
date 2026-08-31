@@ -38,13 +38,14 @@ echo Searching for updates...
 echo.
 
 :: Update Plutonium
-set "updater_url=https://github.com/mxve/plutonium-updater.rs/releases/latest/download/plutonium-updater-x86_64-pc-windows-msvc.zip"
-if not exist "plutonium-updater.exe" (
-	powershell -noprofile -command "$progresspreference = 'silentlycontinue'; invoke-webrequest -uri '%updater_url%' -outfile 'plutonium_updater.zip'" >nul 2>&1
-	powershell -noprofile -command "$progresspreference = 'silentlycontinue'; expand-archive -path 'plutonium_updater.zip' -destinationpath '.' -force" >nul 2>&1
-	del /f /q "plutonium_updater.zip" >nul 2>&1
-)
-if exist "plutonium-updater.exe" plutonium-updater --no-color -d "." -c -q || plutonium-updater --no-color -d "." -q
+if not exist "plutonium.exe" powershell -noprofile -command "$progresspreference = 'silentlycontinue'; iwr 'https://cdn.plutonium.pw/updater/plutonium.exe' -outfile 'plutonium.exe'" 2>nul
+ping cdn.plutonium.pw -n 1 >nul 2>&1 && start "" /min "plutonium.exe" -install-dir "."
+
+:wait
+timeout /t 1 /nobreak >nul
+tasklist /fo csv /nh /fi "imagename eq plutonium.exe" | findstr "plutonium.exe" >nul && goto :wait
+
+taskkill /im plutonium-launcher-win32.exe /f >nul 2>&1
 
 :: Install Bot Warfare
 for /f "delims=" %%a in ('powershell -command "(invoke-restmethod 'https://api.github.com/repos/ineedbots/%app_id%_bot_warfare/releases/latest').assets.browser_download_url" 2^>nul') do (
