@@ -3,7 +3,7 @@
 title Plutonium LAN
 
 set "workdir=%systemdrive%\Plutonium"
-if exist "%~dp0plutonium_portable.txt" set "workdir=%~dp0Plutonium"
+findstr /i "portable" "%~n0" >nul 2>&1 && set "workdir=%~dp0Plutonium"
 taskkill /f /im "plutonium-launcher-win32.exe" 2>nul
 md "%workdir%" >nul 2>&1
 cd /d "%workdir%" 2>nul
