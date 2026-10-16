@@ -41,8 +41,8 @@ echo 4-Uninstall
 echo.
 choice /c 1234 /n /m "Choose an option: "
 if %errorlevel% equ 1 set "choice=install"
-if %errorlevel% equ 2 set "choice=update
-if %errorlevel% equ 3 set "choice=verify
+if %errorlevel% equ 2 set "choice=update"
+if %errorlevel% equ 3 set "choice=verify"
 if %errorlevel% equ 4 set "choice=uninstall"
 
 call :header
